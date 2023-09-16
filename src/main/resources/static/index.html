@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>OCR识别</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/2.1.1/tesseract.min.js"></script>
+    <style>
+    .container {
+      display: flex;
+      align-items: center;
+    }
+
+    #image-preview {
+      max-width: 300px;
+      max-height: 300px;
+    }
+
+    #ocr-result {
+      margin-top: 20px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+    <div>
+        <input type="file" id="image-file" accept="image/*">
+        <textarea id="image-paste" rows="6" placeholder="粘贴图片"></textarea>
+    </div>
+    <div>
+        <img id="image-preview" src="#" alt="图片预览">
+    </div>
+</div>
+<div id="ocr-result"></div>
+
+<script>
+    const imageFileInput = document.getElementById('image-file');
+    const imagePasteInput = document.getElementById('image-paste');
+    const imagePreview = document.getElementById('image-preview');
+    const ocrResult = document.getElementById('ocr-result');
+
+    imageFileInput.addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const imageSrc = e.target.result;
+        imagePreview.src = imageSrc;
+        performOCR(imageSrc);
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    imagePasteInput.addEventListener('input', function (event) {
+      const imageSrc = event.target.value;
+      imagePreview.src = imageSrc;
+      performOCR(imageSrc);
+    });
+
+    function performOCR(imageSrc) {
+    console.error('OCR start');
+      Tesseract.recognize(imageSrc, 'eng')
+        .then(function (result) {
+          ocrResult.textContent = result.text;
+        })
+        .catch(function (error) {
+          console.error('OCR识别出错:', error);
+        });
+    }
+  </script>
+</body>
+</html>

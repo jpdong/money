@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reverse Mortgage Calculator</title>
+    <link rel="stylesheet" href="ReverseMortgageCalculator.css">
+    <!-- 这里可以添加其他的meta标签和CSS文件链接 -->
+
+</head>
+<body>
+<header>
+    <!-- 添加页面顶部导航栏 -->
+    <nav>
+        <!-- 导航链接 -->
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h1>Reverse Mortgage Calculator</h1>
+        <p>A reverse mortgage calculator is a tool designed to help borrowers assess the potential benefits and loan amount of a reverse mortgage. It takes into consideration factors such as the borrower's home value, age, and interest rate to calculate the potential loan amount and accumulated interest.
+
+            Here's a brief explanation of a reverse mortgage calculator and its advantages:
+
+            Input Information: Borrowers need to provide essential information such as home value, loan amount, age, and interest rate. These inputs are used to calculate the results of the reverse mortgage.
+
+            Loan Amount Calculation: Based on the provided information, the calculator uses relevant formulas to determine the potential loan amount that the borrower may be eligible for. This can be a lump sum cash withdrawal or monthly payments.
+
+            Display Results: The calculator displays the calculated results on the screen. This may include the maximum loan amount available, monthly payment amounts, accumulated interest, and other relevant details.
+
+            Advantages of reverse mortgages include:
+
+            Additional Source of Income: Reverse mortgages provide elderly homeowners with an additional cash flow to meet daily living expenses, healthcare costs, or other financial needs.
+
+            No Loan Repayments: Borrowers are not required to make monthly repayments on a reverse mortgage. The loan becomes due when the borrower leaves the home or passes away. This relieves the burden of regular loan payments and offers flexibility.
+
+            Home Ownership Retention: Borrowers can continue to own and reside in their homes throughout the loan term, ensuring they can stay in their familiar surroundings.
+
+            Non-Taxable Loan Proceeds: Funds received from a reverse mortgage are typically considered non-taxable income. This means that borrowers generally do not have to pay personal income tax on the received funds.
+
+            It is important to note that reverse mortgages are not suitable for everyone, and the loan amount and interest rates may vary based on individual circumstances. Borrowers should thoroughly understand the terms and conditions of a reverse mortgage and consult with professional institutions or lenders to ensure it aligns with their specific needs and goals. A reverse mortgage calculator serves as a useful tool to provide borrowers with an initial understanding of the loan potential and potential benefits.</p>
+    </section>
+
+    <section>
+        <h2>计算器</h2>
+        <form id="reverse-mortgage-form">
+            <label for="home-value">房屋价值：</label>
+            <input type="number" id="home-value" required>
+
+            <label for="loan-amount">借款金额：</label>
+            <input type="number" id="loan-amount" required>
+
+            <label for="interest-rate">年利率：</label>
+            <input type="number" id="interest-rate" step="0.01" required>
+
+            <button type="submit">计算</button>
+        </form>
+
+        <div id="result"></div>
+    </section>
+</main>
+
+<footer>
+    <!-- 添加页脚内容，包括联系方式和行动呼吁 -->
+</footer>
+<script>
+    document.getElementById("reverse-mortgage-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // 阻止表单的默认提交行为
+
+      // 获取表单输入的值
+      var homeValue = parseFloat(document.getElementById("home-value").value);
+      var loanAmount = parseFloat(document.getElementById("loan-amount").value);
+      var interestRate = parseFloat(document.getElementById("interest-rate").value);
+
+      // 进行计算
+      var totalInterest = (homeValue - loanAmount) * (interestRate / 100);
+      var totalPayment = loanAmount + totalInterest;
+
+      // 显示结果
+      document.getElementById("result").innerHTML = "预计借款金额：" + totalPayment.toFixed(2);
+    });
+</script>
+</body>
+</html>
